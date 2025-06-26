@@ -1,7 +1,8 @@
 pipeline {
     agent {
-        node {
-            label 'docker-agent-alpine'
+        docker {
+            image 'docker:24.0.5-dind'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         } 
     }
     tools {
