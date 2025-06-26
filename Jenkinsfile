@@ -4,6 +4,10 @@ pipeline {
             label 'docker-agent-alpine'
         } 
     }
+    tools {
+        // Define the tools required for the pipeline
+        maven 'Maven 3.9.2'  // Ensure Maven is installed on the agent
+    }
     environment {
         REGISTRY_URL = 'docker.io'
         IMAGE_NAME = 'joan18ndambiri/ms-spring-overview'
@@ -15,7 +19,7 @@ pipeline {
         stage('Build spring boot app') {
             steps {
                 echo 'Building....' 
-                sh './mvnw clean package -DskipTests'
+                sh 'mvn clean package -DskipTests'
             }
         }
         stage('Build Docker Image') {
