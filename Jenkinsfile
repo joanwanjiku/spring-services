@@ -4,30 +4,64 @@ pipeline {
             label 'docker-agent-alpine'
         } 
     }
+    environment {
+        REGISTRY_URL = 'docker.io'
+        IMAGE_NAME = 'joan18ndambiri/ms-spring-overview'
+        IMAGE_TAG = "v${BUILD_VERSION()}"
+        DOCKER_CREDENTIALS_ID = 'dockerhub'  // Jenkins credential ID
+        DOCKERFILE_DIR = 'ms-spring-overview'  // Directory containing the Dockerfile
+    }
     stages {
-        stage('Build') {
+        stage('Build spring boot app') {
             steps {
                 echo 'Building....' 
-                sh '''
-                echo "doing build stuff"
-                '''
+                sh './mvnw clean package -DskipTests'
             }
         }
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Testing....' 
-                sh '''
-                echo "doing test stuff"
-                '''
+                echo 'Building Docker Image....' 
+                script {
+                    app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}", "-f ${DOCKERFILE_DIR}/Dockerfile .")
+                    env.IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
+                    echo "Docker image built: ${env.IMAGE}"
+                }
             }
         }
-        stage('Production') {
+        stage('Push Docker Image') {
             steps {
-                echo 'deploying....' 
-                sh '''
-                echo "doing production stuff"
-                '''
+                echo 'Pushing Docker Image....' 
+                script {
+                    def registry = "https://${REGISTRY_URL}"
+                    def credentialsId = DOCKER_CREDENTIALS_ID
+
+                    docker.withRegistry(registry, credentialsId) {
+                        app.push()
+                    }
+                    echo "Docker image pushed: ${fullTag}"
+                }
             }
         }
     }
+    post {
+        always {
+            echo 'Cleaning up...'
+            
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
