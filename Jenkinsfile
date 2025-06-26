@@ -7,7 +7,7 @@ pipeline {
     environment {
         REGISTRY_URL = 'docker.io'
         IMAGE_NAME = 'joan18ndambiri/ms-spring-overview'
-        IMAGE_TAG = "v${BUILD_VERSION()}"
+        IMAGE_TAG = "v${BUILD_ID}"
         DOCKER_CREDENTIALS_ID = 'dockerhub'  // Jenkins credential ID
         DOCKERFILE_DIR = 'ms-spring-overview'  // Directory containing the Dockerfile
     }
