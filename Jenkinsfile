@@ -6,7 +6,7 @@ pipeline {
     }
     tools {
         // Define the tools required for the pipeline
-        maven 'maven 3.9.2'  // Ensure Maven is installed on the agent
+        maven 'maven'  // Ensure Maven is installed on the agent
     }
     environment {
         REGISTRY_URL = 'docker.io'
