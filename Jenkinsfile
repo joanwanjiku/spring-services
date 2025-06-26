@@ -29,6 +29,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker Image....' 
+                sh 'docker --version'
                 script {
                     app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}", "-f ${DOCKERFILE_DIR}/Dockerfile .")
                     env.IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
