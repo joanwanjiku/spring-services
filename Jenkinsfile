@@ -22,8 +22,8 @@ pipeline {
 
                 dir("${DOCKERFILE_DIR}") {
                     echo "Building Spring Boot app in directory: ${DOCKERFILE_DIR}"
+                    sh 'mvn clean package -DskipTests'
                 }
-                sh 'mvn clean package -DskipTests'
             }
         }
         stage('Build Docker Image') {
