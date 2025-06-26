@@ -18,7 +18,9 @@ pipeline {
     stages {
         stage('Build spring boot app') {
             steps {
-                echo 'Building....' 
+                dir("${DOCKERFILE_DIR}") {
+                    echo "Building Spring Boot app in directory: ${DOCKERFILE_DIR}"
+                }
                 sh 'mvn clean package -DskipTests'
             }
         }
