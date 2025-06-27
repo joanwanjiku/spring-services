@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:24.0.5-dind'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        } 
-    }
+    agent any
     tools {
         // Define the tools required for the pipeline
         maven 'maven'  // Ensure Maven is installed on the agent
