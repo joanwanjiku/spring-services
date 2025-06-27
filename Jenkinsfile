@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'docker-agent-alpine'
+        } 
+    }
     tools {
         // Define the tools required for the pipeline
         maven 'maven'  // Ensure Maven is installed on the agent
