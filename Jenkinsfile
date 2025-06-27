@@ -1,7 +1,8 @@
 pipeline {
     agent {
-        node {
-            label 'docker-agent-alpine'
+        docker {
+            image 'joan18ndambiri/jenkins-docker-agent:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         } 
     }
     tools {
