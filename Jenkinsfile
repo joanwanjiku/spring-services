@@ -1,7 +1,7 @@
 pipeline {
     agent {
-        node {
-            label 'docker-maven-agent'
+        docker {
+            image 'node:16-alpine'  // Use a Node.js Docker image
         } 
     }
     tools {
