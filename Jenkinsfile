@@ -1,7 +1,7 @@
 pipeline {
     agent {
-        docker {
-            image 'node:16-alpine'  // Use a Node.js Docker image
+        node {
+            label 'docker-maven-agent'
         } 
     }
     tools {
@@ -31,7 +31,7 @@ pipeline {
                 echo 'Building Docker Image....' 
                 sh 'docker --version'
                 script {
-                    app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                    app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}"")
                     env.IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
                     echo "Docker image built: ${env.IMAGE}"
                 }
