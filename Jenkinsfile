@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-            label 'docker-maven-agent'
+            label 'docker-agent'
         } 
     }
     tools {
