@@ -31,7 +31,7 @@ pipeline {
                 echo 'Building Docker Image....' 
                 sh 'docker --version'
                 script {
-                    app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}"")
+                    app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
                     env.IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
                     echo "Docker image built: ${env.IMAGE}"
                 }
