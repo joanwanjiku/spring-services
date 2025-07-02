@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-            label 'docker-test-agent'
+            label 'docker-agent-alpine'
         } 
     }
     tools {
