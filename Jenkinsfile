@@ -18,10 +18,7 @@ pipeline {
     stages {
         stage('Build spring boot app') {
             steps {
-                sh 'ls -la && find . -name pom.xml'
-
                 dir("${DOCKERFILE_DIR}") {
-                    echo "Building Spring Boot app in directory: ${DOCKERFILE_DIR}"
                     sh 'mvn clean package -DskipTests'
                 }
             }
@@ -30,8 +27,9 @@ pipeline {
             steps {
                 echo 'Building Docker Image....' 
                 sh 'docker --version'
+                sh 'ls -la && find . -name Dockerfile'
                 script {
-                    app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                    app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}", "-f ${DOCKERFILE_DIR}/Dockerfile .")
                     env.IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
                     echo "Docker image built: ${env.IMAGE}"
                 }
