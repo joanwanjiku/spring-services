@@ -30,7 +30,7 @@ pipeline {
                     sh 'docker --version'
                     sh 'ls -la && find . -name Dockerfile'
                     script {
-                        app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}", "-f ${DOCKERFILE_DIR}/Dockerfile .")
+                        app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}", '-f Dockerfile .')
                         env.IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
                         echo "Docker image built: ${env.IMAGE}"
                     }
