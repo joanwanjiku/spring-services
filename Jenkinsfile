@@ -44,7 +44,7 @@ pipeline {
                     def registry = "https://${REGISTRY_URL}"
                     def credentialsId = DOCKER_CREDENTIALS_ID
 
-                    docker.withRegistry(registry, credentialsId) {
+                    docker.withRegistry("https://www.docker.com/", credentialsId) {
                         app.push()
                     }
                     echo "Docker image pushed: ${fullTag}"
