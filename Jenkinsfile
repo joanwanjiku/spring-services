@@ -47,7 +47,7 @@ pipeline {
                     docker.withRegistry("", credentialsId) {
                         app.push()
                     }
-                    echo "Docker image pushed: ${fullTag}"
+                    echo "Docker image pushed: ${env.IMAGE}"
                 }
             }
         }
