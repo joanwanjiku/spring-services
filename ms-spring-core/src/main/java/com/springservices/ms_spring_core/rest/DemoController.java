@@ -12,12 +12,15 @@ public class DemoController {
     private Coach myCoach;
     private Coach anotherCoach;
 
+    private Coach swimCoach;
+
     // define a constructor for dependency injection
     public DemoController(@Qualifier("cricketCoach") Coach theCoach,
-    @Qualifier("cricketCoach") Coach theAnotherCoach) {
+    @Qualifier("cricketCoach") Coach theAnotherCoach, @Qualifier("aqua") Coach theSwimCoach) {
         System.out.println("in constructor: " + getClass().getSimpleName());
         myCoach = theCoach;
         anotherCoach = theAnotherCoach;
+        swimCoach = theSwimCoach;
     }
 
 //    setter injection
