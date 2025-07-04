@@ -55,7 +55,12 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            
+            cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'EXCLUDE']])
         }
         success {
             echo 'Pipeline completed successfully!'
